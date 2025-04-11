@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فرم تحویل دارو - داروخانه دکتر کدیور</title>
+  <style>
+    body { font-family: sans-serif; background: #f9f9f9; padding: 2rem; }
+    h2 { text-align: center; color: #2c3e50; }
+    form { background: #fff; padding: 1.5rem; border-radius: 8px; max-width: 900px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 1rem; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid #ccc; margin-top: 0.3rem; }
+    table { width: 100%; margin-top: 2rem; border-collapse: collapse; }
+    th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: center; font-size: 0.9rem; }
+    th { background: #2c3e50; color: #fff; }
+    .btn { margin-top: 1rem; background: #3498db; color: white; padding: 0.7rem 1.5rem; border: none; border-radius: 4px; cursor: pointer; }
+    .btn:hover { background: #2980b9; }
+  </style>
+</head>
+<body>
+
+<h2>فرم تحویل دارو<br>داروخانه دکتر کدیور</h2>
+
+<form id="medForm">
+  <label>نام و نام خانوادگی بیمار:</label>
+  <input type="text" name="name" required>
+
+  <label>کد ملی:</label>
+  <input type="text" name="nid" required>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ردیف</th>
+        <th>نام دارو</th>
+        <th>صبح</th>
+        <th>ظهر</th>
+        <th>عصر</th>
+        <th>شب</th>
+        <th>بعد غذا</th>
+        <th>قبل غذا</th>
+        <th>هنگام خواب</th>
+        <th>توصیه</th>
+      </tr>
+    </thead>
+    <tbody id="drugTable">
+      <tr>
+        <td>1</td>
+        <td><input list="drugList" name="drug1" required></td>
+        <td><input type="checkbox" name="morning1"></td>
+        <td><input type="checkbox" name="noon1"></td>
+        <td><input type="checkbox" name="evening1"></td>
+        <td><input type="checkbox" name="night1"></td>
+        <td><input type="checkbox" name="afterFood1"></td>
+        <td><input type="checkbox" name="beforeFood1"></td>
+        <td><input type="checkbox" name="sleep1"></td>
+        <td><input type="text" name="note1"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <datalist id="drugList">
+    <option value="استامینوفن 500">
+    <option value="آموکسی‌سیلین">
+    <option value="ایبوپروفن">
+    <option value="رانیتیدین">
+    <option value="سیتالوپرام">
+    <option value="آزیترومایسین">
+    <option value="آتنولول">
+    <option value="متفورمین">
+    <option value="انسولین NPH">
+  </datalist>
+
+  <button type="button" class="btn" onclick="addRow()">افزودن داروی دیگر</button>
+  <button type="submit" class="btn">ثبت و چاپ</button>
+</form>
+
+<script>
+  let rowCount = 1;
+  function addRow() {
+    rowCount++;
+    const table = document.getElementById("drugTable");
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${rowCount}</td>
+      <td><input list="drugList" name="drug${rowCount}" required></td>
+      <td><input type="checkbox" name="morning${rowCount}"></td>
+      <td><input type="checkbox" name="noon${rowCount}"></td>
+      <td><input type="checkbox" name="evening${rowCount}"></td>
+      <td><input type="checkbox" name="night${rowCount}"></td>
+      <td><input type="checkbox" name="afterFood${rowCount}"></td>
+      <td><input type="checkbox" name="beforeFood${rowCount}"></td>
+      <td><input type="checkbox" name="sleep${rowCount}"></td>
+      <td><input type="text" name="note${rowCount}"></td>
+    `;
+    table.appendChild(row);
+  }
+
+  document.getElementById("medForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    alert("اطلاعات با موفقیت ثبت شد. برای چاپ از مرورگر استفاده کنید.");
+    window.print();
+  });
+</script>
+
+</body>
+</html>
